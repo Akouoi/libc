@@ -1,11 +1,9 @@
-#include <unistd.h>
-
-void    *ft_memcpy(void *dest, const void *src, size_t n)
+char    *ft_strlcpy(char *dest, const char *src, int l)
 {
     int i;
 
     i = 0;
-    while (i < n)
+    while (src[i] && i <= l)
     {
         dest[i] = src[i];
         i++;

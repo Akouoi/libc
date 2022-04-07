@@ -1,5 +1,5 @@
 NAME = libft.a
-PATH_SRC = ./src/
+PATH_SRC = .
 HEADER = ./includes/
 CC=gcc
 FLAG=-Wall -Werror -Wextra
