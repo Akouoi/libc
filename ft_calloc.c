@@ -23,7 +23,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 			return (NULL);
 		p = '\0';
 	}
-
 	p = malloc (nmemb * size);
 	if (!p)
 		return (NULL);

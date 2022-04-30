@@ -26,12 +26,4 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	}
 	dest[i] = '\0';
 	return (ft_strlen(src));
-}/*
-int	main()
-{
-	char	str[] = "1111";
-
-	printf("%ld\n", ft_strlcpy(str, "AAA", 1));
-	printf("%s\n", str);
 }
-*/

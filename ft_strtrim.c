@@ -31,7 +31,6 @@ static size_t	ft_trimlen(const char *s1, char const *set, size_t size)
 	}
 	while (ft_ischarset(s1[size - 1], set))
 		size--;
-	printf("%li\n", size);
 	return (size);
 }
 
@@ -55,7 +54,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 		j++;
 	}
 	s2[j] = '\0';
-	printf("%s\n", s2);
 	return (s2);
 }
 /*

@@ -27,74 +27,58 @@ static int	ft_nblen(int n)
 	return (power);
 }
 
-static char	*reverse(char *str)
+static char	*ft_limit(int n, char *str)
 {
-	char	*tmp;
-	int	i;
-	int	s_len = ft_strlen(str);
+	char	*int_min;
+	int		i;
 
 	i = 0;
-	tmp = malloc (sizeof(char) * (s_len + 1));
-	if (!tmp)
-		return (NULL);
-	while (i < s_len)
+	int_min = "-2147483648";
+	if (n == -2147483648)
 	{
-		tmp[i] = str[s_len - 1 - i];
-		//printf("%c %c \n", tmp[i], str[s_len - 1 - i]);
-		i++;
+		while (int_min[i])
+		{
+			str[i] = int_min[i];
+			i++;
+		}
 	}
-	tmp[i] = '\0';
-	return (tmp);
-
+	if (n == 0)
+		str[i++] = '0';
+	str[i] = 0;
+	return (str);
 }
+
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		i;
 	int		sign;
 	int		n_len;
 
-	if (n == -2147483648)
-	{
-		str = malloc(sizeof(char) * 12);
-		if (!str)
-			return(NULL);
-		str = "-2147483648";
-		return (str);
-	}
-	if (n == 0)
-	{
-		str = malloc(sizeof(char) * 2);
-		if (!str)
-			return(NULL);
-		str = "0";
-		return (str);
-	}
-	sign = 1;
-	sign -= 2 * (n < 0);
+	if (n == -2147483648 || n == 0)
+		n_len = 10 - 9 * (n == 0);
+	else
+		n_len = ft_nblen(n);
+	sign = 1 - 2 * (n < 0);
 	if (n < 0)
 		n *= -1;
-	n_len = ft_nblen(n);
-	printf("n_len : %d\n", n_len);
 	str = malloc(sizeof(char) * (n_len + (sign < 0) + 1));
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (i < n_len)
+	if (n == -2147483648 || n == 0)
+		return (ft_limit(n, str));
+	str[n_len] = '\0';
+	while (n_len)
 	{
-		str[i] = n % 10 + '0';
+		str[n_len-- - 1] = n % 10 + '0';
 		n /= 10;
-		i++;
 	}
-	printf("sign - str: %d %s\n", sign, str);
 	if (sign < 0)
-		str[i++] = '-';
-	str[i] = '\0';
-	return (reverse (str));
+		str[0] = '-';
+	return (str);
 }
 /*
 int	main()
 {
-	printf("%s\n", ft_itoa(0));
+	printf("%s\n", ft_itoa(-2147483648));
 }
 */
