@@ -1,73 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/25 14:27:24 by akouoi            #+#    #+#             */
+/*   Updated: 2022/04/28 22:37:32 by akouoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-
-static int     ft_wdlen(char const *t, char const* s, char c)
+static char	**ft_clear(char **tab)
 {
-    int i;
-    
-    i = 0;
-    while (s[i] && s[i] != c)
-        i++;
+	unsigned int	i;
 
-    return (i + 1);
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (NULL);
 }
 
-static int     ft_wd(const *s, char c)
+static int	ft_w_nbr(char const *str, char c)
 {
-    int i;
+	int	i;
+	int	count;
 
-    i = 0;
-    while (*s)
-    {
-        while ()
-        if (*s == c)
-            i++;
-        
-    }
-    return (i++);
+	i = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		while (str[i] == c)
+			i++;
+		if (str[i] != c && str[i])
+			count++;
+		while (str[i] != c && str[i])
+			i++;
+	}
+	return (count);
 }
 
-char    **ft_split(char const* s, char c)
+static int	ft_w_len(char const *str, char c)
 {
-    char    **t;
-    int     i;
-    int     j;
-    int     k;
+	int	i;
 
-    i = 0;
-    j = 0;
-    k = 0;
-
-    t = malloc (sizeof(char*) * ft_wd(const char *s, char c))
-    if (!t)
-        return NULL;
-    printf("coucou\n");
-    while (*s == c)
-        s++;
-    while (s[k++])
-    {
-        j = 0;
-        t[i] = malloc (sizeof(char) * 1024);//(ft_wd(s, c) + 1));
-        if (!(t))
-            return(NULL);
-        while (s[k] != c)
-            t[i][j++] = s[k];
-        printf("%s\n", "coucou");
-    }
-    return (t);
+	i = 0;
+	while (str[i] != '\0' && str[i] != c)
+		i++;
+	return (i);
 }
 
-int     main(int ac, char const **av)
+char	**ft_split(char const *s, char c)
 {
-    int     i = 0;
-    char    **tab;
+	char	**p;
+	int		w_nbr;
+	int		i;
 
-    if (ac == 2)
-    {
-        tab = ft_split(av[1], ' ');
-        while (tab[i])
-        {
-            printf("%s\n", tab[i++]);
-        }
-    }
+	i = 0;
+	w_nbr = ft_w_nbr(s, c);
+	p = malloc(sizeof(char *) * (w_nbr + 1));
+	if (!p)
+		return (ft_clear(p));
+	while (*s != '\0' && i < w_nbr)
+	{
+		while (*s == c)
+			s++;
+		if (*s != '\0' && *s != c)
+		{
+			p[i] = malloc (sizeof(char) * (ft_w_len(&(*s), c) + 1));
+			if (!p[i])
+				return (ft_clear(p));
+			ft_strlcpy(p[i], &(*s), ft_w_len(&(*s), c) + 1);
+			i++;
+		}
+		while (*s != c)
+			s++;
+	}
+	return (p);
 }
+/*
+int	main()
+{
+	char	*s = "42";
+	ft_split(s, ' ');
+}*/

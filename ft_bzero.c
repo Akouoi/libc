@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/25 14:07:32 by akouoi            #+#    #+#             */
+/*   Updated: 2022/04/25 14:07:32 by akouoi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void    ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-    size_t i;
-    char    *p;
+	unsigned char	*p;
+	size_t			i;
 
-    p = s;
-    i = 0;
-    while (i < n)
-    {
-        p[i] = '\0';
-        i++;
-    }
-    return ;
+	p = s;
+	i = 0;
+	while (i < n)
+	{
+		p[i] = '\0';
+		i++;
+	}
+	return ;
 }
