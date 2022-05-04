@@ -17,3 +17,14 @@ int	ft_isalnum(int c)
 	return (8 * ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)
 			|| (c >= 48 && c <= 57)));
 }
+/*
+int	main()
+{
+	int  i = 0;
+	while (i <128)
+	{
+		printf("%d ", ft_isalnum(i));
+		printf("%d\n", isalnum(i));
+		i++;
+	}
+}*/

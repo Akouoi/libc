@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 14:11:48 by akouoi            #+#    #+#             */
-/*   Updated: 2022/04/25 14:11:48 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/04 18:25:59 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,35 @@ char	*ft_itoa(int n)
 	int		sign;
 	int		n_len;
 
-	if (n == -2147483648 || n == 0)
-		n_len = 10 - 9 * (n == 0);
-	else
-		n_len = ft_nblen(n);
 	sign = 1 - 2 * (n < 0);
-	if (n < 0)
-		n *= -1;
-	str = malloc(sizeof(char) * (n_len + (sign < 0) + 1));
-	if (!str)
-		return (NULL);
+	if (n == -2147483648 || n == 0)
+		n_len = 11 - 10 * (n == 0);
+	else
+		n_len = ft_nblen(sign * n) + (sign < 0);
+	n *= sign;
+	str = ft_calloc(n_len + 1, sizeof(char));
 	if (n == -2147483648 || n == 0)
 		return (ft_limit(n, str));
-	str[n_len] = '\0';
-	while (n_len)
+	*(str + n_len) = '\0';
+	while (n_len - (sign < 0))
 	{
-		str[n_len-- - 1] = n % 10 + '0';
+		str[n_len - 1] = n % 10 + '0';
 		n /= 10;
+		n_len--;
 	}
 	if (sign < 0)
-		str[0] = '-';
+		str[n_len - 1] = '-';
 	return (str);
 }
 /*
 int	main()
 {
-	printf("%s\n", ft_itoa(-2147483648));
+	printf("0 = %s\n", ft_itoa(0));
+	printf("42 = %s\n", ft_itoa(42));
+	printf("1 = %s\n", ft_itoa(1));
+	printf("-2147483648 = %s\n", ft_itoa(-2147483648));
+	printf("2147483647 = %s\n", ft_itoa(2147483647));
+	printf("-1 = %s\n", ft_itoa(-1));
+
 }
 */

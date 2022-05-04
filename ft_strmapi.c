@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:29:10 by akouoi            #+#    #+#             */
-/*   Updated: 2022/04/25 15:29:10 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/03 18:55:03 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*p;
 	int		i;
 
-	p = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	p = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!p)
 		return (NULL);
 	i = 0;
@@ -26,6 +26,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		p[i] = (*f)(i, s[i]);
 		i++;
 	}
+	p[i] = '\0';
 	return (p);
 }
 /*
