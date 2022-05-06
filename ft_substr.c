@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:32:14 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/04 18:29:22 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/04 20:55:11 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,29 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
-	size_t	i;
 
-	i = 0;
-	if (start + len < ft_strlen(s))
-		sub = malloc((len + 1) * sizeof(char));
-	if (ft_strlen(s) < len)
-		sub = malloc((sizeof(s) + 1) * sizeof(char));
+	if (ft_strlen(s) < start)
+	{
+		sub = ft_calloc(1, sizeof(char));
+		return (sub);
+	}
+	else if (ft_strlen(s) < len)
+		sub = ft_calloc((ft_strlen(s) + 1), sizeof(char));
 	else
-		sub = malloc((len + 1) * sizeof(char));
+		sub = ft_calloc((len - start * (start + len > ft_strlen(s)) + 1), 1);
 	if (!sub)
 		return (NULL);
-	while (i < len && s[start + i])
-	{
-		sub[i] = s[start + i];
-		i++;
-	}
-	sub[i] = '\0';
+	ft_strlcpy(sub, s + start, len + 1);
 	return (sub);
 }
-
+/*
 int	main()
 {
 	char * s;
 	
-	s = ft_substr("tripouille", 0, 42000);
-	printf("ft_substr(\"tripouille\", 0, 42000) %s\n", s);
+	s = ft_substr("tripouille", 100, 1);
+	printf("ft_substr(\"tripouille\", 100, 1) %s\n", s);
+	s = ft_substr("tripouille", 1, 1);
+	printf("ft_substr(\"tripouille\", 1, 1) %s\n", s);
 
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:45:02 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/04 16:57:29 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/06 12:24:45 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
+	t_list	*tmp;
+
 	if (!lst)
 		return (NULL);
-	while (lst && lst->next)
-		lst = lst->next;
-	return (lst);
+	tmp = lst;
+	while (tmp->next)
+		tmp = tmp->next;
+	return (tmp);
 }
 /*
 int	main()

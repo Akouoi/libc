@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 14:27:24 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/03 17:32:13 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/05 15:07:10 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ft_w_nbr(char const *str, char c)
 	return (count);
 }
 
-static int	ft_w_len(char const *str, char c)
+static size_t	ft_w_len(char const *str, char c)
 {
 	int	i;
 
@@ -55,34 +55,43 @@ static int	ft_w_len(char const *str, char c)
 	return (i);
 }
 
+static size_t	ft_filltab(char *dest, const char *src, char c, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size == 0)
+		return (ft_w_len(src, c));
+	while (src[i] && src[i] != c && i < (size - 1))
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (ft_w_len(src, c));
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**p;
-	int		w_nbr;
-	int		i;
+	size_t	w_nbr;
+	size_t	i;
 
 	i = 0;
-	w_nbr = 0;
 	w_nbr = ft_w_nbr(s, c);
-	printf("\nw_nbr = %d\n", w_nbr);
 	p = malloc(sizeof(char *) * (w_nbr + 1));
 	if (!p)
-		return (ft_clear(p));
-	if (!w_nbr)
-		p[0] = NULL;
+		return (NULL);
 	while (*s != '\0' && i < w_nbr)
 	{
 		while (*s == c)
 			s++;
 		if (*s != '\0' && *s != c)
 		{
-			p[i] = ft_calloc ((ft_w_len(&(*s), c) + 1), sizeof(char));
+			p[i] = malloc ((ft_w_len(&(*s), c) + 1) * sizeof(char));
 			if (!p[i])
 				return (ft_clear(p));
-			//ft_bzero(p[i], ft_w_len(&(*s), c) + 1);
-			ft_strlcpy(p[i], &(*s), ft_w_len(&(*s), c) + 1);
-			printf("tab [%d] = %s\n", i, p[i]);
-			i++;
+			ft_filltab(p[i++], &(*s), c, ft_w_len(&(*s), c) + 1);
 		}
 		while (*s != c)
 			s++;
@@ -90,9 +99,36 @@ char	**ft_split(char const *s, char c)
 	p[i] = NULL;
 	return (p);
 }
+
 /*
+	printf("w_nbr = %ld\n", w_nbr);
+	p = malloc(sizeof(char *) * (w_nbr + 1));
+	if (!p)
+		return (NULL);
+	while (*s != '\0' && i < w_nbr)
+	{
+		while (*s == c)
+			s++;
+		if (*s != '\0' && *s != c)
+		{
+			p[i] = malloc ((ft_w_len(&(*s), c) + 1) * sizeof(char));
+			if (!p[i])
+				return (ft_clear(p));
+			ft_filltab(p[i], &(*s), c, ft_w_len(&(*s), c) + 1);
+			printf("tab [%ld] = %s\n", i, p[i]);
+			i++;
+		}
+		while (*s != c)
+			s++;
+	}
+	p[i] = NULL;
+	printf("tab [%ld] = %s\n", i, p[i]);
+	return (p);
+}
 int	main()
 {
-	char	*s = "Tripouille";
-	ft_split(s, ' ');
+	// char	*s = ft_strdup("Tripouille");
+	char	**tab = ft_split("   Tri   pouille  ", ' ');
+	// free(s);
+	ft_clear(tab);
 }*/

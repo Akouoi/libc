@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:31:35 by akouoi            #+#    #+#             */
-/*   Updated: 2022/04/25 15:31:35 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/04 21:35:58 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@ static int	ft_ischarset(const char c, const char *set)
 
 static size_t	ft_trimlen(const char *s1, char const *set, size_t size)
 {
-	while (ft_ischarset(*s1, set))
+	size_t	i;
+	size_t	stop;
+
+	i = 0;
+	while (s1[size - 1] && ft_ischarset(s1[size - 1], set))
+		size--;
+	stop = size;
+	while (i < stop && ft_ischarset(s1[i], set))
 	{
 		size--;
-		s1++;
+		i++;
 	}
-	while (ft_ischarset(s1[size - 1], set))
-		size--;
 	return (size);
 }
 
@@ -42,7 +47,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	len;
 
 	len = ft_trimlen(s1, set, ft_strlen(s1));
-	s2 = malloc (sizeof(char) * len + 1);
+	s2 = malloc (sizeof(char) * (len + 1));
 	i = 0;
 	j = 0;
 	while (ft_ischarset(s1[i], set))
@@ -61,7 +66,8 @@ int	main()
 {
 	char	*s2;
 
-	s2 = ft_strtrim("iiiprintiii", "if");
+	s2 = ft_strtrim("abcdba", "acb");
 		printf("%s\n", s2);
+	free(s2);
 	return (0);
 }*/

@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:31:04 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/03 19:18:11 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/06 17:58:42 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,27 @@ char	*ft_strrchr(const char *s, int c)
 	c = c % 256;
 	if (!(*s))
 		return (NULL);
-	size = 0;
-	size = ft_strlen(s);
+	size = ft_strlen(s) - 1;
 	p = (char *)s;
 	if (c == '\0')
-		return (&p[size]);
-	while (p[size - 1] && size)
+		return (&p[size + 1]);
+	while (p[size])
 	{
-		if (p[size - 1] == c)
-			return (&p[size - 1]);
+		if (p[size] == c)
+			return (&p[size]);
 		size--;
 	}
-	return (NULL);//&p[ft_strlen(s)]);
+	return (NULL);
 }
 /*
-int	main()
+int	main(int argc, char *av[])
 {
-	printf("%s\n", ft_strrchr("hello", 'i'));
+	if (argc == 3)
+	{
+		char * result_ptr = ft_strrchr(av[1], av[2][0]);
+		if (result_ptr)
+			printf("%s\n", result_ptr);
+		else
+			puts("RESULT IS NULL");
+	}
 }*/
