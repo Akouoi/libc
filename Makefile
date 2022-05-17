@@ -2,7 +2,6 @@ NAME = libft.a
 EXEC = exec
 CC = gcc
 CFLAG = -Wall -Werror -Wextra
-LDFLAG = -L. -lft
 SRC = ft_atoi.c \
 	ft_bzero.c \
 	ft_calloc.c \
@@ -59,8 +58,6 @@ $(NAME): $(OBJ)
 	ranlib $(NAME)
 .c.o :
 	$(CC) -c $(CFLAG) $(SRC) $(BONUS_SRC)
-build : all
-	$(CC) -o $(EXEC) $(CFLAG) $(LDFLAG) main.c
 
 bonus : $(OBJ) $(BONUS_OBJ)
 	ar rc $(NAME) $^

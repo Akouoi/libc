@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:07:14 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/06 12:29:54 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/16 12:00:58 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;
 
-	if (*lst)
+	if (*lst && new)
 	{
 		tmp = *lst;
 		tmp = (ft_lstlast(*(lst)));

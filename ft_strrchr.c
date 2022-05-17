@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 15:31:04 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/06 17:58:42 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/16 12:00:16 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strrchr(const char *s, int c)
 	p = (char *)s;
 	if (c == '\0')
 		return (&p[size + 1]);
-	while (p[size])
+	while (size >= 0)
 	{
 		if (p[size] == c)
 			return (&p[size]);
