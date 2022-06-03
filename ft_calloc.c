@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 14:08:46 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/06 17:50:17 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/27 17:51:10 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		size = 1;
 		nmemb = 1;
 	}
-	p = (char *)malloc(nmemb * size);
+	p = malloc(nmemb * size);
 	if (!p)
 		return (NULL);
 	ft_bzero(p, nmemb * size);
-	return ((void *)p);
+	return (p);
 }

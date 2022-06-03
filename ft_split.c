@@ -6,7 +6,7 @@
 /*   By: akouoi <akouoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 14:27:24 by akouoi            #+#    #+#             */
-/*   Updated: 2022/05/05 15:07:10 by akouoi           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:48:32 by akouoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	ft_w_nbr(char const *str, char c)
 
 	i = 0;
 	count = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 	{
 		while (str[i] == c)
@@ -79,22 +81,25 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	w_nbr = ft_w_nbr(s, c);
+	printf("w_nbr = %ld\n", w_nbr);
 	p = malloc(sizeof(char *) * (w_nbr + 1));
 	if (!p)
 		return (NULL);
-	while (*s != '\0' && i < w_nbr)
+	while (*s && i < w_nbr)
 	{
 		while (*s == c)
 			s++;
-		if (*s != '\0' && *s != c)
+		if (*s && *s != c)
 		{
 			p[i] = malloc ((ft_w_len(&(*s), c) + 1) * sizeof(char));
 			if (!p[i])
 				return (ft_clear(p));
 			ft_filltab(p[i++], &(*s), c, ft_w_len(&(*s), c) + 1);
 		}
-		while (*s != c)
+		while (*s && *s != c)
 			s++;
+		printf("tab [%i] = %s\n", 0, p[0]);
+		printf("tab [%ld] = %s\n", i, p[i]);
 	}
 	p[i] = NULL;
 	return (p);
@@ -124,11 +129,11 @@ char	**ft_split(char const *s, char c)
 	p[i] = NULL;
 	printf("tab [%ld] = %s\n", i, p[i]);
 	return (p);
-}
+}*/
 int	main()
 {
 	// char	*s = ft_strdup("Tripouille");
-	char	**tab = ft_split("   Tri   pouille  ", ' ');
+	char	**tab = ft_split("   Tripouille  ", ' ');
 	// free(s);
 	ft_clear(tab);
-}*/
+}
